@@ -1,34 +1,22 @@
 <template>
   <div class="login">
-    <b-button>Login</b-button>
+    <b-input placeHolder="id" v-model="form.id" />
+    <b-button @click="onSubmit">Login</b-button>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Form } from '@/interfaces/login';
 import { Component, Vue } from 'vue-property-decorator';
 
-@Component({
-  data() {
-    return {
-      form: {
-        id: '',
-        password: ''
-      }
-    };
-  },
-  methods: {
-    onSubmit: e => {
-      e.preventDefault();
-      alert(this.form);
-    },
-    onReset: e => {
-      e.preventDefault();
-      this.form.id = '';
-      this.form.password = '';
-    }
-  }
-})
-export default class Login extends Vue {}
+@Component
+export default class Login extends Vue {
+  private form: Form = { id: '', password: '' };
+
+  onSubmit = (): void => {
+    console.log(this.form.id);
+  };
+}
 </script>
 
 <style scoped></style>
