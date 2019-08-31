@@ -1,0 +1,125 @@
+<script type="text/javascript" src="/3group/templates/js/copyto.js"></script>
+
+<div class="container-fluid p-0">
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs justify-content-center">
+		<li class="nav-item">
+			<a id="a_ssh_copyto" class="nav-link active" data-toggle="tab" href="#div_ssh_copyto">Copyto</a>
+		</li>
+	</ul>
+
+	<!-- Nav items -->
+	<div class="tab-content mt-3 mb-3 p-2">
+		<!-- target info setting -->
+		<div class="form-inline justify-content-center">
+			<div class="form-inline col-lg-2 mt-0 mb-3">
+				<span class="badge badge-pill badge-secondary title-lt-xs">Target server</span>
+				<input id="ipt_target_server" class="form-control col-lg-10" type="text" v-model="value">
+			</div>
+			<div class="form-inline col-lg-3 mb-3">
+				<span class="badge badge-pill badge-secondary title-lt-xs">Target directory</span>
+				<input id="ipt_target_dir" class="form-control col-lg-10" type="text" v-model="value">
+			</div>
+			<div class="form-inline col-lg-2 mb-3">
+				<span class="badge badge-pill badge-secondary title-lt-xs">Account name</span>
+				<input id="ipt_account_name" class="form-control col-lg-10" type="text" v-model="value">
+			</div>
+			<div class="form-inline col-lg-2 mb-3">
+				<span class="badge badge-pill badge-secondary title-lt-xs">Account password</span>
+				<input id="ipt_account_password" class="form-control col-lg-10" type="password" v-model="value">
+			</div>
+			<div class="form-inline col-lg-1">
+				<button id="btn_get_data" class="btn btn-success mb-3" type="button" v-on:click="getData">Get data</button>
+			</div>
+		</div>
+
+		<hr class="m-1 mb-3">
+
+		<!-- copyto tab -->
+		<div id="div_ssh_copyto" class="tab-pane offset-md-1 col-md-10 active">
+			<div id="div_info_copyto_output" class="row mb-2">
+
+				<!-- file list -->
+				<div id="div_file_list" class="border border-info rounded col-md-3 p-2 pt-3 m-1 mt-3 mb-3">
+					<span class="badge badge-pill badge-info title-lt-md">File list</span>
+					<ul class="nav nav-pills d-block mh-50-vh of-y-auto">
+						<li class="nav-item" v-for="info, idx in informations" :key="info.file_name">
+							<a class="nav-link" data-toggle="tab" :href="'#div_' + idx" v-on:click="getCurrentInfo(idx)">
+								<span class="ui-icon ui-icon-file mr-2"></span>
+								<span class="align-middle">{{ info.file_name_only }}</span>
+							</a>
+						</li>
+					</ul>
+					<hr class="m-2">
+					<button id="btn_add_info" class="btn btn-sm btn-success col-5" v-on:click="createInfoFile">Add file</button>
+					<button id="btn_edit_info_name" class="btn btn-sm btn-info col-4" v-on:click="editInfoFileName">Rename</button>
+					<button id="btn_del_info" class="btn btn-sm btn-danger col-2" v-on:click="delInfoFile">Delete</button>
+				</div>
+
+				<!-- information show -->
+				<div id="div_info_show" class="border border-info rounded col-md-8 p-2 m-1 mt-3 mb-3">
+					<span class="badge badge-pill badge-info title-lt-md">Informations</span>
+					<div class="tab-content">
+						<label id="lbl_chk_lock" class="f-r cursor-pointer p-1">
+							<span class="badge badge-pill badge-secondary title-rt-sm">
+								<input id="chk_execute_lock" type="checkbox" checked>
+								<span class="align-middle pl-1">Execute lock</span>
+							</span>
+						</label>
+						<template v-for="info, idx in informations" :key="'template_' + idx">
+							<div :id="'div_' + idx" class="tab-pane inline">
+								<input :id="'hdn_file_name_' + idx" type="hidden" value="info.file_name">
+								<div class="input-group input-group-sm rounded border border-info mb-2 p-0">
+									<span class="input-group-btn"><button class="btn btn-info right-no-radius pt-1 pb-1" type="button" disabled>Proj. name</button></span>
+									<input :id="'ipt_project_name_' + idx" class="form-control border-0 pt-1 pb-1" type="text" v-model="info.config.project_name">
+									<span class="input-group-btn"><button class="btn btn-info left-no-radius right-no-radius pt-1 pb-1" type="button" disabled>Source name</button></span>
+									<input :id="'ipt_source_name_' + idx" class="form-control border-0 pt-1 pb-1" type="text" v-model="info.config.source_name">
+								</div>
+								<div class="input-group input-group-sm rounded border border-info mb-2 p-0">
+									<span class="input-group-btn"><button class="btn btn-info right-no-radius pt-1 pb-1" type="button" disabled>Remote</button></span>
+									<input :id="'ipt_remote_server_' + idx" class="form-control border-0 pt-1 pb-1" type="text" v-model="info.config.remote_server">
+									<span class="input-group-btn"><button class="btn btn-success left-no-radius pt-1 pb-1" type="button" v-on:click="openPage(idx)">Open page</button></span>
+								</div>
+								<div class="input-group input-group-sm rounded border border-info mb-2 p-0">
+									<span class="input-group-btn"><button class="btn btn-info right-no-radius pt-1 pb-1" type="button" disabled>Issue No.</button></span>
+									<input :id="'ipt_issue_num_' + idx" class="form-control border-0 pt-1 pb-1" type="text" v-model="info.config.issue_num">
+									<span class="input-group-btn"><button class="btn btn-info left-no-radius right-no-radius pt-1 pb-1" type="button" disabled>Compile Opt.</button></span>
+									<input :id="'ipt_compile_option_' + idx" class="form-control border-0 pt-1 pb-1" type="text" v-model="info.config.compile_option">
+								</div>
+								<div class="input-group input-group-sm rounded border border-info mb-2 p-0">
+									<span class="input-group-btn"><button class="btn btn-info right-no-radius pt-1 pb-1" type="button" disabled>User</button></span>
+									<input :id="'ipt_user_' + idx" class="form-control border-0 pt-1 pb-1" v-model="info.config.user">
+									<span class="input-group-btn"><button class="btn btn-info left-no-radius right-no-radius pt-1 pb-1" type="button" disabled>Password</button></span>
+									<input :id="'ipt_password_' + idx" class="form-control border-0 pt-1 pb-1" type="password" v-model="info.config.password">
+								</div>
+								<div class="input-group input-group-sm rounded border border-info mb-2 p-0">
+									<span class="input-group-btn"><button class="btn btn-info right-no-radius pt-1 pb-1" type="button" disabled>Auto yes</button></span>
+									<input :id="'ipt_auto_yes_' + idx" class="form-control border-0 pt-1 pb-1" type="text" v-model="info.config.auto_yes">
+									<span class="input-group-btn"><button class="btn btn-info left-no-radius right-no-radius pt-1 pb-1" type="button" disabled>Auto patch</button></span>
+									<input :id="'ipt_auto_patch_' + idx" class="form-control border-0 pt-1 pb-1" type="text" v-model="info.config.auto_patch">
+								</div>
+								<div class="input-group input-group-sm mb-2 p-0">
+									<div class="border border-info rounded col-md-9 mb-1 p-0">
+										<button class="btn btn-info bottom-no-radius border-0 col-md-12 pt-1 pb-1" type="button" disabled>Updated files</button>
+										<textarea :id="'txt_updated_' + idx" class="form-control top-no-radius border-0 bottom-no-radius" rows="5" v-model="info.updated_files"></textarea>
+										<button class="btn btn-info top-no-radius bottom-no-radius border-0 col-md-12 pt-1 pb-1" type="button" disabled>Ignore files</button>
+										<textarea :id="'txt_ignored_' + idx" class="form-control top-no-radius border-0" rows="5" v-model="info.ignore_files"></textarea>
+									</div>
+									<div class="btn-group-vertical btn-group-sm col-md-3 m-0 pl-1 pr-1">
+										<button :id="'btn_patch_' + idx" class="btn-patch btn btn-success rounded h-100 w-100 mb-1 p-0" v-on:click="copyAndPatch(idx)" type="button"><span class="ui-icon ui-icon-circle-triangle-e mr-1"></span><span class="align-middle">Copy &amp; Patch</span></button>
+										<button :id="'btn_rollback_' + idx" class="btn-rollback btn btn-danger rounded h-75 w-100 mb-1 p-0" v-on:click="rollback(idx)" type="button"><span class="ui-icon ui-icon-arrowrefresh-1-w mr-1"></span><span class="align-middle">Rollback</span></button>
+										<button :id="'btn_update_' + idx" class="btn-update btn btn-primary rounded h-75 w-100 mb-1 p-0" v-on:click="updateInfoFile(idx, true, '保存')" type="button"><span class="ui-icon ui-icon-disk mr-1"></span><span class="align-middle">Save</span></button>
+										<button :id="'btn_backup_list_' + idx" class="btn-backup-list btn btn-info rounded h-75 w-100 mb-1 p-0" v-on:click="backupList(idx)" type="button"><span class="ui-icon ui-icon-search mr-1"></span><span class="align-middle">Backup file list</span></button>
+										<button :id="'btn_patch_list_' + idx" class="btn-patch-list btn btn-info rounded h-75 w-100 mb-1 p-0" v-on:click="tree(idx)" type="button"><span class="ui-icon ui-icon-search mr-1"></span><span class="align-middle">Patch file list</span></button>
+										<button :id="'btn_last_log_' + idx" class="btnm-help btn btn-info rounded h-75 w-100 mb-1 p-0" v-on:click="lastLog(idx)" type="button"><span class="ui-icon ui-icon-help mr-1"></span><span class="align-middle">Show last log</span></button>
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,31 @@
+<script type="text/javascript" src="/common/templates/js/md5sum.js"></script>
+<script type="text/javascript" src="/templates/js/md5.js"></script>
+<div class="container-fluid">
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs justify-content-center">
+		<li class="nav-item">
+			<a class="nav-link active" data-toggle="tab" href="#div_md5sum">md5sum</a>
+		</li>
+	</ul>
+
+	<div id="div_md5sum" class="tab-pane offset-md-2 col-md-8 active">
+		<!-- Nav items -->
+		<div class="tab-content mt-3 mb-3">
+			<!-- md5sum -->
+			<div class="input-group mh-30-vh mb-3">
+				<div class="custom-file">
+					<input id="ipt_file_select" class="custom-file-input cursor-pointer" type="file" multiple="multiple" v-model="value" v-on:change="onChanged">
+					<span class="custom-file-label cursor-pointer align-middle m-0" for="ipt_file_select"><span class="">ファイル選択</span></span>
+				</div>
+			</div>
+			<div class="progress text-center col-md-12 p-0 mb-1">
+				<div id="progress_md5sum" class="progress-bar progress-bar-animated justify-content-center" role="progressbar" v-bind:style="{'width': width}">
+					( {{curr_progress}}% / 100% )
+				</div>
+			</div>
+			<div id="div_md5sum_result" class="p-0 m-0">
+				<pre id="pre_md5sum_result" class="border rounded mh-45-vh text-left p-2 pb-5"><template v-for="result in results">{{result}}<br></template><copy-btn data-clipboard-target="#pre_md5sum_result"></copy-btn></pre>
+			</div>
+		</div>
+	</div>
+</div>

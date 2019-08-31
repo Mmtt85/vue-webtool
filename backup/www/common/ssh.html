@@ -1,0 +1,68 @@
+<script type="text/javascript" src="/common/templates/js/ssh.js"></script>
+
+<div class="container-fluid p-0">
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs justify-content-center">
+		<li class="nav-item">
+			<a id="a_ssh_execute" class="nav-link active" data-toggle="tab" href="#div_ssh_execute">CLIコマンド実行</a>
+		</li>
+	</ul>
+
+	<!-- Nav items -->
+	<div class="tab-content mt-3 mb-3 p-2">
+		<!-- target info setting -->
+		<div class="form-inline justify-content-center">
+			<div class="form-inline col-lg-2 mb-3">
+				<span class="badge badge-pill badge-secondary title-lt-xs">Target server</span>
+				<input id="ipt_target_server" class="form-control" type="text" v-model="value">
+			</div>
+			<div class="form-inline col-lg-2 mb-3">
+				<span class="badge badge-pill badge-secondary title-lt-xs">Account name</span>
+				<input id="ipt_account_name" class="form-control" type="text" v-model="value">
+			</div>
+			<div class="form-inline col-lg-2 mb-3">
+				<span class="badge badge-pill badge-secondary title-lt-xs">Account password</span>
+				<input id="ipt_account_password" class="form-control" type="password" v-model="value">
+			</div>
+		</div>
+
+		<hr class="mt-1 mb-3">
+
+		<!-- ssh execute tab -->
+		<div id="div_ssh_execute" class="tab-pane offset-md-2 col-md-8 active">
+			<div class="row">
+				<div id="div_cli_command" class="col-12 rounded border border-1 p-2 pt-3 mt-3">
+					<span class="badge badge-pill badge-info title-lt-sm">CLI command</span>
+					<div class="col-md-12 m-0 p-0 border-0">
+						<pre id="pre_cli_command_result" class="top-radius text-light bg-dark mh-30-vh text-left m-0 p-2 pb-5">{{ result }}<copy-btn data-clipboard-target="#pre_cli_command_result"></copy-btn></pre>
+					</div>
+					<div class="input-group m-0 mb-2 p-0 border-0">
+						<span class="input-group-btn">
+							<button id="btn_prompt" class="btn btn-dark top-no-radius right-no-radius m-0 p-1 pl-2 pr-2" disabled>{{value}}</button>
+						</span>
+						<input id="ipt_cli_command" class="form-control bg-light pt-1 pb-1" type="text" v-model="value" v-on:keyup="onKeyUp">
+						<button id="btn_command_execute" class="btn btn-success left-no-radius right-no-radius p-1" type="button" v-on:click="execute">実行</button>
+						<button id="btn_command_clear" class="btn btn-danger top-no-radius left-no-radius p-1" type="button" v-on:click="clear">クリア</button>
+					</div>
+				</div>
+				<div id="div_cli_command" class="col-12 rounded border border-1 p-2 pt-3 mt-4">
+					<span class="badge badge-pill badge-info title-lt-sm">Shell script</span>
+					<div class="input-group mb-2 p-0">
+						<div class="border rounded col-md-10 mb-1 p-0">
+							<button class="btn btn-dark text-left text-light bottom-no-radius border-0 col-md-12 pt-1 pb-1" type="button" disabled>#!/bin/sh</button>
+							<textarea id="txt_cli_script" class="form-control bg-light top-no-radius col-md-12" rows="5" v-on:keyup="onKeyUp" v-model="value"></textarea>
+						</div>
+						<div class="btn-group-vertical col-md-2 m-0 pl-1 pr-0">
+							<button id="btn_script_execute" class="btn btn-success h-100 rounded mb-1 p-0" type="button" v-on:click="execute">実行</button>
+							<button id="btn_script_clear" class="btn btn-danger h-75 rounded mb-1 p-0" type="button" v-on:click="clear">クリア</button>
+						</div>
+					</div>
+					<div class="col-md-12 m-0 p-0">
+						<pre id="pre_cli_script_result" class="border rounded text-light bg-dark mh-30-vh text-left m-0 p-2 pb-5">{{result}}</template><copy-btn data-clipboard-target="#pre_cli_script_result"></copy-btn></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

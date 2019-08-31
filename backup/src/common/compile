@@ -1,0 +1,102 @@
+#/bin/sh
+
+curr_dir=`pwd`
+js_library="my_library.js"
+
+make_md5sum_file(){
+	if [ -f "${curr_dir}/.md5sum" ]; then
+		rm -rf "${curr_dir}/.md5sum"
+	fi
+
+	for file in `ls *.c *.cpp 2>/dev/null`; do
+		md5sum $file >> ${curr_dir}/.md5sum
+	done
+}
+
+compile_emcc(){
+	file_name="${curr_dir}/$1"
+	file_name_only="$1"
+	if [ -f "$file_name" ]; then
+		#echo "	emcc $file_name -s WASM=1 -o ${file_name%.c}.js"
+		if [ -f "$js_library" ]; then
+            emcc "$file_name" -s WASM=1 --js-library my_library.js -o "${file_name%.c}.js"
+        else
+            emcc "$file_name" -s WASM=1 -o "${file_name%.c}.js"
+        fi
+
+		#echo "	sed -i --" "s/${file_name_only%.c}.wasm/\/${PWD##*/}\/wasm\/${file_name_only%.c}.wasm/g" "${file_name%.c}.js"
+		sed -i -- "s/${file_name_only%.c}.wasm/\/${PWD##*/}\/wasm\/${file_name_only%.c}.wasm/g" "${file_name%.c}.js"
+
+		#echo "	cp -prf ${file_name%.c}.js ../../www/${PWD##*/}/wasm"
+		#echo "	cp -prf ${file_name%.c}.wasm ../../www/${PWD##*/}/wasm"
+		mv "${file_name%.c}.js" "../../www/${PWD##*/}/wasm"
+		mv "${file_name%.c}.wasm" "../../www/${PWD##*/}/wasm"
+		echo
+	else
+		echo "Not exist file: $file_name"
+	fi
+}
+
+compile_force(){
+	if [ "$1" = "all" ]; then
+		for file in `ls *.c *.cpp 2>/dev/null`; do
+			echo "force compile: $file"
+			compile_emcc "$file"
+		done
+	else
+		echo "force compile: $1"
+		compile_emcc "$1"
+	fi
+
+	make_md5sum_file
+}
+
+compile_all(){
+	if [ -f "${curr_dir}/.md5sum" ]; then
+		for file in `ls *.c *.cpp 2>/dev/null`; do
+			file_name="$file"
+			file_md5sum=`md5sum $file | awk '{print $1}'`
+
+			is_file_exist_in_md5sum_file=false
+			while read line; do
+				file_md5sum_in_md5sum=`echo $line | awk '{print $1}'`
+				file_name_in_md5sum=`echo $line | awk '{print $2}'`
+
+				if [ "$file_name" = "$file_name_in_md5sum" ]; then
+					is_file_exist_in_md5sum_file=true
+				 	if [ "$file_md5sum" != "$file_md5sum_in_md5sum" ]; then
+				 		echo "updated file compile: $file_name"
+				 		compile_emcc "$file_name"
+						break
+					else
+						echo "$file_name is not updated."
+					fi
+				fi
+			done < ${curr_dir}/.md5sum
+
+			if [ $is_file_exist_in_md5sum_file = false ]; then
+				echo "new file compile: $file_name"
+				compile_emcc "$file_name"
+			fi
+		done
+
+		make_md5sum_file
+
+	else
+		echo ".md5sum not exist."
+		make_md5sum_file
+	fi
+}
+
+usage(){
+	echo "$0 -a"
+	echo "$0 -f [all | file_name]"
+}
+
+if [ "$1" = "-a" -o "$1" = "" ]; then
+	compile_all
+elif [ "$1" = "-f" -a "$2" != "" ]; then
+	compile_force "$2"
+else
+	usage
+fi

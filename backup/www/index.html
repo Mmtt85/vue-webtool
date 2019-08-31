@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="/templates/css/bootstrap.4.0.0.min.css">
+	<link rel="stylesheet" href="/templates/css/common.css">
+	<link rel="stylesheet" href="/templates/css/animate.css">
+	<link rel="stylesheet" href="/templates/library/icheck/skins/flat/flat.css">
+	<link rel="stylesheet" href="/templates/library/jquery-ui-1.12.1/jquery-ui.min.css">
+	<link rel="stylesheet" href="/templates/library/jquery-ui-1.12.1/jquery-ui.icon-font.min.css">
+
+	<script type="text/javascript" src="/templates/js/jquery.3.3.1.min.js"></script>
+	<script type="text/javascript" src="/templates/js/bootstrap.4.0.0.min.js"></script>
+	<script type="text/javascript" src="/templates/library/icheck/icheck.min.js"></script>
+	<script type="text/javascript" src="/templates/library/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+
+	<!-- favicon -->
+	<link rel="icon" href="/templates/images/favicon.ico">
+
+	<title>Qualitia Web Tools login</title>
+</head>
+<body class="text-dark bg-light">
+<div class="container-fluid h-50-vh bg-soft-primary">
+	<div id="div_login_box" class="offset-lg-4 col-lg-4 t-20-vh animated">
+		<div class="d-flex justify-content-start text-center mb-4">
+			<span class="badge badge-pill badge-light font-size-2"><img src="/templates/images/top_ci_.png"></span>
+		</div>
+
+		<div class="d-flex justify-content-end mb-lg-3 mb-2">
+			<select class="form-control form-control-sm col-5">
+				<option>LANGUAGE</option>
+				<option>日本語</option>
+				<option>ENGLISH</option>
+				<option>한국어</option>
+				<option>中文</option>
+			</select>
+		</div>
+
+		<div class="rounded p-lg-5 p-4 border border-primary bg-light">
+			<div class="mb-1 text-right">
+				<small class="font-weight-bold text-sm-right text-danger">※ 仮画面のため、このままLoginボタンを押してください。</small>
+			</div>
+			<div class="mb-lg-4 mb-3">
+				<div class="input-group rounded">
+					<span class="bg-muted"><img class="pl-1 pr-1" src="/templates/images/login_field_icon_id.png"></span>
+					<input type="text" class="form-control form-control-sm rounded border-primary col-11 p-1 m-0" placeholder="Loginボタンを押してください。">
+				</div>
+			</div>
+
+			<div class="mb-lg-5 mb-4">
+				<div class="input-group">
+					<span class="bg-muted"><img class="pl-1 pr-1" src="/templates/images/login_field_icon_pwd.png"></span>
+					<input type="password" class="form-control form-control-sm rounded border-primary col-11 p-1 m-0">
+				</div>
+			</div>
+
+			<div class="">
+				<button id="btn_login" class="btn btn-primary text-light col-lg-8 col-6 p-1 m-0">Login</button>
+				<label class="f-r cursor-pointer p-1">
+					<input type="checkbox"><span class="align-middle pl-2">ID 保存</span>
+				</label>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+	$("#btn_login").on("click", function(){
+		$("#div_login_box").addClass("zoomOut");
+
+		setTimeout(function(){
+			location.href = "/home.html";
+		}, 700);
+	});
+	$('input').iCheck({
+		checkboxClass: 'icheckbox_flat',
+		radioClass: 'iradio_flat',
+		increaseArea: '20%', // optional
+	});
+});
+</script>

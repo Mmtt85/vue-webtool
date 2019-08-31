@@ -1,0 +1,69 @@
+<script type="text/javascript" src="/common/templates/js/time_convert.js"></script>
+
+<div class="container-fluid">
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs justify-content-center">
+		<li class="nav-item">
+			<a class="nav-link active" data-toggle="tab" href="#div_curr_time">現在時間</a>
+		</li>
+	</ul>
+	<!-- Nav items -->
+	<div class="tab-content mt-3 mb-3">
+		<div id="div_curr_time" class="tab-pane active col-md-12">
+			<!-- time converter -->
+			<h5>unixtime ↔ datetime converter</h5>
+			<div class="input-group">
+				<input id="ipt_time_convert" class="form-control text-center offset-md-4 col-md-2" type="text" v-model="value">
+				<span class="input-group-btn">
+					<button id="btn_time_convert" class="btn btn-secondary left-no-radius" type="button" v-on:click="toggleDate">変更</button>
+					<span id="span_time_convert" class="text-center col-md-2">{{ result }}</span>
+				</span>
+			</div>
+
+			<hr>
+
+			<!-- time table -->
+			<table id="table_tr" class="table table-responsive-md">
+			<thead class="thead-dark">
+				<tr>
+					<th>timezone</th>
+					<th>year</th>
+					<th>month</th>
+					<th>date</th>
+					<th>hours</th>
+					<th>minutes</th>
+					<th>seconds</th>
+					<th>day</th>
+					<th>toString</th>
+					<th>unixtime(sec)</th>
+					<th>unixtime(milisec)</th>
+				</tr>
+			</thead>
+				<tbody>
+					<tr v-for="date in dates">
+						<td><span class="form-control-sm">{{ date.type }}</span></td>
+						<td><span class="form-control-sm">{{ date.obj.getFullYear() }}</span></td>
+						<td><span class="form-control-sm">{{ date.obj.getMonth() + 1 }}</span></td>
+						<td><span class="form-control-sm">{{ date.obj.getDate() }}</span></td>
+						<td><span class="form-control-sm">{{ date.obj.getHours() }}</span></td>
+						<td><span class="form-control-sm">{{ date.obj.getMinutes() }}</span></td>
+						<td><span class="form-control-sm">{{ date.obj.getSeconds() }}</span></td>
+						<td><span class="form-control-sm">{{ date.day }}</span></td>
+						<td><span class="form-control-sm">{{ date.toString }}</span></td>
+						<td><span class="form-control-sm">{{ parseInt(date.obj.getTime() / 1000) }}</span></td>
+						<td><span class="form-control-sm">{{ date.obj.getTime() }}</span></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<hr>
+
+			<!-- refresh buttons -->
+			<div class="row mt-3">
+				<div class="mx-auto col-12">
+					<button id="btn_refresh" class="btn btn-success btn-sm mr-2" type="button" v-on:click="refresh">リフレッシュ</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

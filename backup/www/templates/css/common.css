@@ -1,0 +1,72 @@
+/* for desktop */
+.cursor-pointer { cursor: pointer !important; }
+.left-radius { border-bottom-left-radius: .25rem !important; border-top-left-radius: .25rem !important; }
+.right-radius { border-bottom-right-radius: .25rem !important; border-top-right-radius: .25rem !important; }
+.top-radius { border-top-left-radius: .25rem !important; border-top-right-radius: .25rem !important; }
+.bottom-radius { border-bottom-left-radius: .25rem !important; border-bottom-right-radius: .25rem !important; }
+.left-no-radius { border-bottom-left-radius: 0px !important; border-top-left-radius: 0px !important; }
+.right-no-radius { border-bottom-right-radius: 0px !important; border-top-right-radius: 0px !important; }
+.top-no-radius { border-top-left-radius: 0px !important; border-top-right-radius: 0px !important; }
+.bottom-no-radius { border-bottom-left-radius: 0px !important; border-bottom-right-radius: 0px !important; }
+.mh-5-vh { max-height: 5vh; } .mh-15-vh { max-height: 15vh; } .mh-20-vh { max-height: 20vh; } .mh-25-vh { max-height: 25vh; }
+.mh-30-vh { max-height: 30vh; } .mh-35-vh { max-height: 35vh; } .mh-40-vh { max-height: 40vh; } .mh-45-vh { max-height: 45vh; }
+.mh-50-vh { max-height: 50vh; } .mh-55-vh { max-height: 55vh; } .mh-60-vh { max-height: 60vh; } .mh-65-vh { max-height: 65vh; }
+.mh-70-vh { max-height: 70vh; } .mh-75-vh { max-height: 75vh; } .mh-80-vh { max-height: 80vh; } .mh-85-vh { max-height: 85vh; }
+.mh-90-vh { max-height: 90vh; } .mh-95-vh { max-height: 95vh; } .mh-100-vh { max-height: 100vh; }
+.w-5-vh { width: 5vh; } .w-10-vh { width: 10vh; } .w-20-vh { width: 20vh; } .w-30-vh { width: 30vh; }
+.w-40-vh { width: 40vh; } .w-50-vh { width: 50vh; } .w-60-vh { width: 60vh; } .w-70-vh { width: 70vh; }
+.w-80-vh { width: 80vh; } .w-90-vh { width: 90vh; } .w-100-vh { width: 100vh; }
+.h-5-vh { height: 5vh; } .h-10-vh { height: 10vh; } .h-20-vh { height: 20vh; } .h-30-vh { height: 30vh; }
+.h-40-vh { height: 40vh; } .h-50-vh { height: 50vh; } .h-60-vh { height: 60vh; } .h-70-vh { height: 70vh; }
+.h-80-vh { height: 80vh; } .h-90-vh { height: 90vh; } .h-100-vh { height: 100vh; }
+.t-5-vh { top: 5vh; } .t-10-vh { top: 10vh; } .t-20-vh { top: 20vh; } .t-30-vh { top: 30vh; }
+.t-40-vh { top: 40vh; } .t-50-vh { top: 50vh; } .t-60-vh { top: 60vh; } .t-70-vh { top: 70vh; }
+.t-80-vh { top: 80vh; } .t-90-vh { top: 90vh; } .t-95-vh { top: 95vh; }
+.r-5-vh { right: 5vh; } .r-10-vh { right: 10vh; } .r-20-vh { right: 20vh; } .r-30-vh { right: 30vh; }
+.r-40-vh { right: 40vh; } .r-50-vh { right: 50vh; } .r-60-vh { right: 60vh; } .r-70-vh { right: 70vh; }
+.r-80-vh { right: 80vh; } .r-90-vh { right: 90vh; } .r-95-vh { right: 95vh; }
+.b-1 { border: 1px solid; } .bl-1 { border-left: 1px solid; } .bb-1 { border-bottom: 1px solid; } .br-1 { border-right: 1px solid; } .bt-1 { border-top: 1px solid; }
+.b-2 { border: 2px solid; } .bl-2 { border-left: 2px solid; } .bb-2 { border-bottom: 2px solid; } .br-2 { border-right: 2px solid; } .bt-2 { border-top: 2px solid; }
+.b-4 { border: 4px solid; } .bl-4 { border-left: 4px solid; } .bb-4 { border-bottom: 4px solid; } .br-4 { border-right: 4px solid; } .bt-4 { border-top: 4px solid; }
+.bc-muted { border-color: transparent; } .bc-orange { border-color: #ff9980; } .bc-blue { border-color: #99b3ff; } .bc-green { border-color: #38ba9b; }
+.bc-soft-primary { border-color: #325bb3 !important; }
+.text-soft-primary { color: #325bb3 !important; } .text-soft-primary-all * { color: #325bb3 !important; }
+.alert { position: fixed; z-index: 99999; } .f-l { float: left; } .f-r { float: right; }
+.of-auto { overflow: auto; } .of-x-auto { overflow-x: auto; } .of-y-auto{ overflow-y: auto; }
+.title-lt-xs { position: absolute; left:0; padding: 2px 8px 4px 8px; top:-11px; font-size:10pt !important; z-index:1; }
+.title-lt-sm { position: absolute; left:0; padding: 4px 11px 4px 11px; top:-17px; font-size:12pt !important; z-index:1; }
+.title-lt-md { position: absolute; left:0; padding: 6px 14px 6px 14px; top:-21px; font-size:14pt !important; z-index:1; }
+.title-lt-lg { position: absolute; left:0; padding: 8px 17px 8px 17px; top:-25px; font-size:16pt !important; z-index:1; }
+.title-rt-xs { position: absolute; right:0; padding: 2px 8px 4px 8px; top:-11px; font-size:10pt !important; z-index:1; }
+.title-rt-sm { position: absolute; right:0; padding: 4px 11px 4px 11px; top:-17px; font-size:12pt !important; z-index:1; }
+.title-rt-md { position: absolute; right:0; padding: 6px 14px 6px 14px; top:-21px; font-size:14pt !important; z-index:1; }
+.title-rt-lg { position: absolute; right:0; padding: 8px 17px 8px 17px; top:-25px; font-size:16pt !important; z-index:1; }
+.insert-into-lb { position:absolute; left:0px; bottom: 5px;} .insert-into-lt { position:absolute; left:0px; top: 0px;}
+.insert-into-rb { position:absolute; right:0px; bottom: 5px;} .insert-into-rt { position:absolute; right:0px; top: 5px;}
+::-webkit-scrollbar { width: 10px; height:10px; } ::-webkit-scrollbar-track { border-radius: 10px; }
+::-webkit-scrollbar-thumb { background-color: #bfbfbf; border-radius: 10px; box-shadow:0 0 0 1px rgba(255, 255, 255, .3); }
+.font-size-0 { font-size:.6em !important; } .font-size-1 { font-size:.8em !important; } .font-size-2 { font-size:1em !important; }
+.font-size-3 { font-size:1.5em !important; } .font-size-4 { font-size:2em !important; } .font-size-5 { font-size:3em !important; }
+
+/* for mobile */
+@media only screen and (max-width : 575px) {
+	.font-size-flex * { font-size:.97em !important; }
+	::-webkit-scrollbar { width: 3px; height:3px;} ::-webkit-scrollbar-track { border-radius: 3px; }
+	::-webkit-scrollbar-thumb { background-color: #bfbfbf; border-radius: 10px; box-shadow:0 0 0 1px rgba(255, 255, 255, .3); }
+}
+@media only screen and (min-width: 576px) and (max-width : 767px) {
+	.font-size-flex * { font-size:.98em !important; }
+}
+@media only screen and (min-width : 768px) and (max-width : 1199px) {
+	.font-size-flex * { font-size:.99em !important; }
+}
+@media only screen and (min-width : 1200px) {
+	.font-size-flex * { font-size:1em; }
+
+}
+
+/* boostrap css customize */
+.form-control:focus { box-shadow: none !important; -webkit-box-shadow: none !important; background-color: #ffeecc; }
+.btn:focus, .btn:active { box-shadow: none !important; -webkit-box-shadow: none !important;  }
+.has-error .form-control:focus { box-shadow: none; -webkit-box-shadow: none; }
+.bg-gray-light { background-color: #e6e6e6; } .bg-soft-primary { background-color: #325bb3; }

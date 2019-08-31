@@ -1,0 +1,68 @@
+<script type="text/javascript" src="/3group/templates/js/license.js"></script>
+
+<div class="container-fluid">
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs justify-content-center">
+		<li class="nav-item">
+			<a class="nav-link active" data-toggle="tab" href="#tab_ip_addr">Ip Addr検査方式</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#div_domain">Domain検査方式</a>
+		</li>
+	</ul>
+
+	<!-- Nav itesm -->
+	<div class="tab-content mt-3 mb-3">
+		<!-- ip addr -->
+		<div id="tab_ip_addr" class="tab-pane active">
+			<div class="row mt-2 mb-2 justify-content-center">
+				<div id="div_ip_addr" class="col-lg-8 offset-lg-2 form-inline mt-4 mb-4">
+					<span class="badge badge-pill title-lt-sm" :class="badge_state" for="ipt_ip_addr">IP ADDR</span>
+					<input class="form-control" :class="[valid, text_type]" v-model="value" v-on:keyup="checkIpAddr" placeholder="127.0.0.1" />
+					<small class="form-control-sm text-danger ml-4" v-if="seen">{{message}}</small>
+				</div>
+
+				<div id="div_user_num" class="col-lg-8 offset-lg-2 form-inline mb-4">
+					<span class="badge badge-pill title-lt-sm" :class="badge_state" for="ipt_user_num">ユーザー数</span>
+					<input class="form-control" :class="[valid, text_type]" v-model="value" v-on:keyup="isNum" placeholder="0" />
+					<small class="form-control-sm text-danger ml-4" v-if="seen">{{message}}</small>
+				</div>
+
+				<div id="div_expire_day" class="col-lg-8 offset-lg-2 form-inline mb-4">
+					<span class="badge badge-pill title-lt-sm" :class="badge_state" for="ipt_expire_day">有効期限（日数）</span>
+					<input class="form-control" :class="[valid, text_type]" v-model="value" v-on:keyup="isNum" placeholder="0" />
+					<small class="form-control-sm text-danger ml-4" v-if="seen">{{message}}</small>
+				</div>
+
+				<div id="div_p_type" class="col-lg-8 offset-lg-2 form-inline mb-4">
+					<span class="badge badge-pill title-lt-sm" :class="badge_state" for="ipt_p_type">P.Type</span>
+					<input class="form-control" :class="[valid, text_type]" v-model="value" v-on:keyup="isNum" placeholder="0" />
+					<small class="form-control-sm text-danger ml-4" v-if="seen">{{message}}</small>
+				</div>
+
+				<div id="div_version" class="col-lg-8 offset-lg-2 form-inline">
+					<span class="badge badge-pill title-lt-sm" :class="badge_state" for="ipt_p_type">Version</span>
+					<input class="form-control" :class="[valid, text_type]" v-model="value" placeholder="0" />
+					<small class="form-control-sm text-danger ml-4" v-if="seen">{{message}}</small>
+				</div>
+			</div>
+		</div>
+
+		<!-- domain -->
+		<div id="div_domain" class="tab-pane">
+			<div class="col-sm-12">
+				DOMAIN
+		  </div>
+		</div>
+
+		<hr>
+
+		<!-- get license & reset buttons -->
+		<div class="row mt-3">
+			<div class="mx-auto col-sm-12">
+				<button id="btn_get_license" class="btn btn-success btn-sm mr-2" :disabled="disabled" v-on:click="getLicense">ライセンス所得</button>
+				<button id="btn_reset" class="btn btn-danger btn-sm ml-2" v-on:click="reset">リセット</button>
+			</div>
+		</div>
+	</div>
+</div>
