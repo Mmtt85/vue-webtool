@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
-import Login from './views/Login.vue';
+import Main from './views/Main.vue';
+import Index from './components/Index.vue';
+import Base64 from './components/tools/Base64.vue';
 
 Vue.use(Router);
 
@@ -11,13 +12,20 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'login',
-      component: Login
-    },
-    {
-      path: '/home',
-      name: 'home',
-      component: Home
+      name: 'main',
+      component: Main,
+      children: [
+        {
+          path: '/',
+          name: 'home',
+          component: Index
+        },
+        {
+          path: 'base64',
+          name: 'base64',
+          component: Base64
+        }
+      ]
     }
   ]
 });
