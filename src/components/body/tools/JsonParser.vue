@@ -1,10 +1,14 @@
 <template>
-  <div>Body Index</div>
+  <div>
+    json parser
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class Index extends Vue {}
+export default class JsonParser extends Vue {}
 </script>
+
+<style scoped></style>

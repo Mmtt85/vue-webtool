@@ -8,8 +8,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import Header from '@/views/Header.vue';
-import Body from '@/views/Body.vue';
+import Header from '@/components/header/Index.vue';
+import Body from '@/components/body/Index.vue';
 
 @Component({
   components: {

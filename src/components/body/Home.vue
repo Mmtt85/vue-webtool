@@ -1,10 +1,10 @@
 <template>
-  <router-view />
+  <div>Body Home</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class Body extends Vue {}
+export default class Home extends Vue {}
 </script>

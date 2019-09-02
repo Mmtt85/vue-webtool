@@ -23,7 +23,7 @@ import UserInfo from '@/components/header/UserInfo.vue';
     UserInfo
   }
 })
-export default class Header extends Vue {
+export default class Index extends Vue {
   goHome() {
     if (this.$router.currentRoute.path !== '/') this.$router.push('/');
   }
