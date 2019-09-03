@@ -21,7 +21,8 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class Tools extends Vue {
   goTools(path: ToolsPath) {
-    if (this.$router.currentRoute.path !== path) this.$router.push(path);
+    const { $router } = this;
+    if ($router.currentRoute.path !== path) $router.push(path);
   }
 }
 </script>

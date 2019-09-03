@@ -59,7 +59,7 @@ export default class Login extends Vue {
         title: 'Login Success',
         variant: 'success',
         toaster: 'b-toaster-top-right',
-        autoHideDelay: 1000,
+        autoHideDelay: 500,
         toastClass: 'text-center'
       });
     } else {
@@ -68,8 +68,7 @@ export default class Login extends Vue {
         title: 'Failure',
         variant: 'danger',
         toaster: 'b-toaster-top-right',
-        autoHideDelay: 1000,
-        appendToast: true,
+        autoHideDelay: 2000,
         toastClass: 'text-center'
       });
     }

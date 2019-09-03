@@ -31,10 +31,19 @@ import Login from '@/components/Login.vue';
 })
 export default class UserInfo extends Vue {
   toggleLoginWindow() {
-    this.$bvModal.show('login-modal');
+    const { $bvModal } = this;
+    $bvModal.show('login-modal');
   }
   onLogout() {
-    this.$store.commit('logout');
+    const { $store, $bvToast } = this;
+    $store.commit('logout');
+    $bvToast.toast('Logout', {
+      title: 'Logout',
+      variant: 'info',
+      toaster: 'b-toaster-top-right',
+      autoHideDelay: 500,
+      toastClass: 'text-center'
+    });
   }
 }
 </script>

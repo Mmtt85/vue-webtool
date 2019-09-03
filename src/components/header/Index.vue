@@ -25,7 +25,8 @@ import UserInfo from '@/components/header/UserInfo.vue';
 })
 export default class Index extends Vue {
   goHome() {
-    if (this.$router.currentRoute.path !== '/') this.$router.push('/');
+    const { $router } = this;
+    if ($router.currentRoute.path !== '/') $router.push('/');
   }
 }
 </script>
