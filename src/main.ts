@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import VueApollo from 'vue-apollo';
+import PortalVue from 'portal-vue';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -26,6 +27,7 @@ Vue.config.productionTip = false;
 
 Vue.use(BootstrapVue);
 Vue.use(VueApollo);
+Vue.use(PortalVue);
 
 new Vue({
   router,

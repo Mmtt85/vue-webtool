@@ -1,55 +1,79 @@
 <template>
-  <div class="login">
-    <div role="group">
-      <label for="input-id">ID</label>
-      <b-form-input
-        id="input-id"
-        type="text"
-        v-model="form.id"
-        required
-        autofocus
-        aria-describedby="input-live-help input-live-feedback"
-        placeholder="Enter your ID"
-        trim
-      />
-      <b-form-invalid-feedback id="input-live-feedback">
-        Enter at least 3 letters
-      </b-form-invalid-feedback>
-      <label for="input-password">Password</label>
-      <b-form-input
-        id="input-password"
-        type="password"
-        v-model="form.password"
-        required
-      />
-      <b-button type="submit" @click="onSubmit" variant="outline-success"
-        >Login</b-button
-      >
-    </div>
-  </div>
+  <portal to="modals">
+    <b-modal id="login-modal" @show="resetModal">
+      <template slot="modal-title">
+        Login
+      </template>
+      <div role="group" class="w-75 mx-auto">
+        <label for="input-id">ID</label>
+        <b-form-input
+          id="input-id"
+          type="text"
+          class="mb-3"
+          v-model="form.id"
+          autofocus
+          aria-describedby="input-live-help input-live-feedback"
+          placeholder="Enter your ID"
+          trim
+        />
+        <label for="input-password">Password</label>
+        <b-form-input
+          id="input-password"
+          type="password"
+          v-model="form.password"
+          required
+        />
+      </div>
+      <template slot="modal-footer" class="">
+        <span class="text-right mr-4"
+          >id: root<br />
+          password: root</span
+        >
+        <b-button @click="login" variant="outline-success">Login</b-button>
+      </template>
+    </b-modal>
+  </portal>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 import { Auth } from '@/interfaces/auth';
-import Component from 'vue-class-component';
-
-@Component({})
+import { Component, Vue } from 'vue-property-decorator';
+import { Portal } from 'portal-vue';
+@Component({
+  components: {
+    Portal
+  }
+})
 export default class Login extends Vue {
-  public show: boolean = true;
   public form: Auth = { id: '', password: '', msg: '' };
+  public resetModal() {
+    this.form = { id: '', password: '', msg: '' };
+  }
+  public login() {
+    const { form, $store, $bvModal, $bvToast } = this;
 
-  public onSubmit() {
-    const { form, $router } = this;
-
-    if (form.id && form.password) {
-      if (form.id === 'root') $router.push('/home');
-      else {
-        form.msg = 'Invalid ID or Password';
-      }
+    if (form.id === 'root' && form.password === 'root') {
+      $store.commit('login', { id: form.id });
+      $bvModal.hide('login-modal');
+      $bvToast.toast('Success', {
+        title: 'Login Success',
+        variant: 'success',
+        toaster: 'b-toaster-top-right',
+        autoHideDelay: 1000,
+        toastClass: 'text-center'
+      });
+    } else {
+      form.msg = 'Invalid ID or Password';
+      $bvToast.toast(form.msg, {
+        title: 'Failure',
+        variant: 'danger',
+        toaster: 'b-toaster-top-right',
+        autoHideDelay: 1000,
+        appendToast: true,
+        toastClass: 'text-center'
+      });
     }
   }
-  // public isValidId = this.form.id.length > 2;
 }
 </script>
 

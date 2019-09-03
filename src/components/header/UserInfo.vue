@@ -7,19 +7,31 @@
       </b-nav-item>
     </template>
     <template v-else>
-      <b-nav-item title="login" @click="onLogin"
+      <b-nav-item title="login" @click="toggleLoginWindow"
         ><font-awesome-icon icon="sign-in-alt"
       /></b-nav-item>
     </template>
+    <Login />
   </b-navbar-nav>
 </template>
+
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import Login from '@/components/Login.vue';
 
-@Component
+@Component({
+  components: {
+    Login
+  },
+  data() {
+    return {
+      isLoginShow: false
+    };
+  }
+})
 export default class UserInfo extends Vue {
-  onLogin() {
-    this.$store.commit('login', { id: 'test@user.login' });
+  toggleLoginWindow() {
+    this.$bvModal.show('login-modal');
   }
   onLogout() {
     this.$store.commit('logout');
